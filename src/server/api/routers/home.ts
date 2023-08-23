@@ -10,7 +10,16 @@ export const homeRouter = createTRPCRouter({
     getName: publicProcedure.query(({ ctx }) => {
         return ctx.prisma.home.findMany()
     }),
-    createBill: publicProcedure.query(({ ctx }) => {
-        return ctx.prisma.home.findMany()
+    queryBill: publicProcedure.query(({ ctx }) => {
+        return ctx.prisma.bill.findMany()
     }),
+    createBill: publicProcedure.input(z.object({
+        type: z.string()
+    })).mutation(({ ctx }) => {
+        ctx.prisma.bill.create({
+            data: { type: 'asd', amount: 1, image: 'imagetest' }
+        }).catch(err => {
+            console.log(err)
+        })
+    })
 })

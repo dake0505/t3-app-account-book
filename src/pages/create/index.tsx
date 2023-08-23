@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { HStack, Input } from "@chakra-ui/react";
 import { FormControl, FormLabel, useRadioGroup } from "@chakra-ui/react";
 import RadioCard from "./RadioCard";
 import { api } from "~/utils/api";
 
 const Home = () => {
-    const query = api.home.createBill.useQuery();
+    const query = api.home.queryBill.useQuery();
+    const mutation = api.home.createBill.useMutation();
     const options = ["吃饭", "打车", "shopping", "振鼎鸡"];
 
     const { getRootProps, getRadioProps } = useRadioGroup({
@@ -18,6 +19,7 @@ const Home = () => {
 
     const createBill = () => {
         console.log(query.data);
+        mutation.mutate({ type: "振鼎鸡 " });
     };
 
     return (
