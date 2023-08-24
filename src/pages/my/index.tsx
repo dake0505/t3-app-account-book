@@ -3,9 +3,9 @@ import React from "react";
 const My = () => {
 
   return (
-    <div className="flex relative min-h-screen bg-sky-950">
+    <div className="flex relative min-h-screen bg-default-bg">
         <div>
-
+          
         </div>
     </div>
   );

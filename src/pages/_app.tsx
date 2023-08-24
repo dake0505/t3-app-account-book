@@ -19,10 +19,10 @@ const MyApp: AppType<{ session: Session | null }> = ({
                 <Component {...pageProps}  />
 
                 {/* 底部导航 */}
-                <div className="absolute inset-x-0 bottom-0 flex h-20 w-screen items-center justify-around rounded-t-lg bg-sky-900">
+                <div className="absolute inset-x-0 bottom-0 flex h-20 w-screen items-center justify-around rounded-t-lg bg-default-card">
                     <div
                         className={`flex h-16 w-16 items-center justify-center rounded-full ${
-                            activeBtn === "create" ? "bg-emerald-600" : ""
+                            activeBtn === "create" ? "bg-default-active" : ""
                         }`}
                         onClick={() => {
                             setActiveBtn("create");
@@ -62,7 +62,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
                     </div>
                     <div
                         className={`flex h-16 w-16 items-center justify-center rounded-full ${
-                            activeBtn === "home" ? "bg-emerald-600" : ""
+                            activeBtn === "home" ? "bg-default-active" : ""
                         }`}
                         onClick={() => {
                             setActiveBtn("home");
@@ -100,7 +100,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
                     </div>
                     <div
                         className={`flex h-16 w-16 items-center justify-center rounded-full ${
-                            activeBtn === "my" ? "bg-emerald-600" : ""
+                            activeBtn === "my" ? "bg-default-active" : ""
                         }`}
                         onClick={() => {
                             setActiveBtn("my");

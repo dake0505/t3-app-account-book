@@ -5,8 +5,7 @@ import RadioCard from "./RadioCard";
 import { api } from "~/utils/api";
 
 const Home = () => {
-    const query = api.home.queryBill.useQuery();
-    const mutation = api.home.createBill.useMutation();
+    const mutation = api.bill.createBill.useMutation();
     const options = ["吃饭", "打车", "shopping", "振鼎鸡"];
 
     const { getRootProps, getRadioProps } = useRadioGroup({
@@ -18,12 +17,11 @@ const Home = () => {
     const group = getRootProps();
 
     const createBill = () => {
-        console.log(query.data);
         mutation.mutate({ type: "振鼎鸡 " });
     };
 
     return (
-        <div className="relative flex min-h-screen flex-col bg-sky-950 font-sans text-white">
+        <div className="relative flex min-h-screen flex-col bg-default-bg font-sans text-white">
             <p className="px-10 py-4 text-4xl font-semibold">新增</p>
             {/* 账单信息 */}
             <div className="px-10">
@@ -44,15 +42,15 @@ const Home = () => {
                     <FormLabel>金额</FormLabel>
                     <Input type="number" />
                 </FormControl>
-                <FormControl className="pb-4">
+                {/* <FormControl className="pb-4">
                     <FormLabel>图片</FormLabel>
                     <Input type="number" />
-                </FormControl>
+                </FormControl> */}
             </div>
 
             {/* 按钮 */}
             <div className="flex w-screen justify-between px-10 py-5">
-                <button className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-950 font-semibold">
+                <button className="flex h-12 w-12 items-center justify-center rounded-xl bg-default-card font-semibold">
                     <svg
                         className="h-6 w-6 stroke-emerald-600"
                         viewBox="0 0 24 24"
@@ -77,7 +75,7 @@ const Home = () => {
                     </svg>
                 </button>
                 <button
-                    className="flex h-12 w-2/3 items-center justify-center rounded-xl bg-emerald-600 font-semibold"
+                    className="flex h-12 w-2/3 items-center justify-center rounded-xl bg-default-active font-semibold"
                     onClick={createBill}
                 >
                     创建

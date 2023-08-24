@@ -21,9 +21,9 @@ const RadioCard: NextPage<IProps> = (props) => {
                 borderRadius="md"
                 boxShadow="md"
                 _checked={{
-                    bg: "#059669",
+                    bg: "#40DF9F",
                     color: "white",
-                    borderColor: "#059669",
+                    borderColor: "#40DF9F",
                 }}
                 // _focus={{
                 //     boxShadow: "outline",
