@@ -1,5 +1,5 @@
-import React from "react";
 import { HStack, Input } from "@chakra-ui/react";
+import { RepeatIcon } from "@chakra-ui/icons";
 import { FormControl, FormLabel, useRadioGroup } from "@chakra-ui/react";
 import RadioCard from "./RadioCard";
 import { api } from "~/utils/api";
@@ -39,6 +39,10 @@ const Home = () => {
                     </HStack>
                 </FormControl>
                 <FormControl className="pb-4">
+                    <FormLabel>名称</FormLabel>
+                    <Input />
+                </FormControl>
+                <FormControl className="pb-4">
                     <FormLabel>金额</FormLabel>
                     <Input type="number" />
                 </FormControl>
@@ -51,28 +55,7 @@ const Home = () => {
             {/* 按钮 */}
             <div className="flex w-screen justify-between px-10 py-5">
                 <button className="flex h-12 w-12 items-center justify-center rounded-xl bg-default-card font-semibold">
-                    <svg
-                        className="h-6 w-6 stroke-emerald-600"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                        <g
-                            id="SVGRepo_tracerCarrier"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        ></g>
-                        <g id="SVGRepo_iconCarrier">
-                            {" "}
-                            <path
-                                d="M9 9L15 15M15 9L9 15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            ></path>{" "}
-                        </g>
-                    </svg>
+                    <RepeatIcon />
                 </button>
                 <button
                     className="flex h-12 w-2/3 items-center justify-center rounded-xl bg-default-active font-semibold"

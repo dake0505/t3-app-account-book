@@ -10,7 +10,9 @@ export default {
       'default-card': '#30444E',
       'default-active': '#40DF9F',
       'white': '#FFFFFF',
-      'default-orange': '#FFC542'
+      'default-orange': '#FFC542',
+      'default-border': '#B8C2C0',
+      'default-error': '#FF575F'
     }
   },
   plugins: [],

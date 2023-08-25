@@ -1,7 +1,5 @@
 import { z } from "zod"
 import { createTRPCRouter, publicProcedure } from "../trpc"
-import { prisma } from "~/server/db"
-import { type Bill } from "@prisma/client"
 
 
 
@@ -23,7 +21,7 @@ export const billRouter = createTRPCRouter({
         type: z.string()
     })).mutation(({ ctx }) => {
         ctx.prisma.bill.create({
-            data: { type: 'asd', amount: 1, image: 'imagetest' }
+            data: { type: 'asd', amount: 1, image: 'imagetest', name: '振鼎鸡' }
         }).catch(err => {
             console.log(err)
         })
