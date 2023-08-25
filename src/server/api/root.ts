@@ -11,7 +11,7 @@ import { typeRouter } from "./routers/type";
 export const appRouter = createTRPCRouter({
   example: exampleRouter,
   bill: billRouter,
-  type: typeRouter
+  billType: typeRouter
 });
 
 // export type definition of API
