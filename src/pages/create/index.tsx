@@ -1,38 +1,61 @@
-import { HStack, Input } from "@chakra-ui/react";
+import { HStack, Input, useToast } from "@chakra-ui/react";
 import { RepeatIcon } from "@chakra-ui/icons";
 import { FormControl, FormLabel, useRadioGroup } from "@chakra-ui/react";
 import RadioCard from "./RadioCard";
 import { api } from "~/utils/api";
+import { useState } from "react";
 
 const Home = () => {
     const mutation = api.bill.createBill.useMutation();
-    const options = ["吃饭", "打车", "shopping", "振鼎鸡"];
+    const billTypeData = api.billType.queryType.useQuery();
+    const [billName, setBillName] = useState<string>("");
+    const [billType, setBillType] = useState<string>("");
+    const [billAmount, setBillAmount] = useState<number>();
+
+    const toast = useToast()
 
     const { getRootProps, getRadioProps } = useRadioGroup({
         name: "framework",
         defaultValue: "吃饭",
-        onChange: console.log,
+        onChange: setBillType,
     });
 
     const group = getRootProps();
 
-    const createBill = () => {
-        mutation.mutate({ type: "振鼎鸡 " });
+    const reset = () => {
+        setBillAmount(undefined)
+        setBillName('')
+        setBillType('')
+    }
+
+    const createBill = async () => {
+        try {
+            await mutation.mutateAsync({
+                name: billName,
+                type: billType,
+                amount: billAmount ?? 0,
+            });
+            toast({
+                title: '创建成功',
+                status: 'success'
+            })
+            reset()
+        } catch (error) {}
     };
 
     return (
         <div className="relative flex min-h-screen flex-col bg-default-bg font-sans text-white">
-            <p className="px-10 py-4 text-4xl font-semibold">新增</p>
+            <p className="px-10 mt-16 mb-4 text-4xl font-semibold">Create</p>
             {/* 账单信息 */}
             <div className="px-10">
                 <FormControl className="pb-4">
                     <FormLabel>类型</FormLabel>
                     <HStack {...group} className="flex flex-wrap">
-                        {options.map((value) => {
-                            const radio = getRadioProps({ value });
+                        {billTypeData.data?.map((value) => {
+                            const radio = getRadioProps({ value: value.name });
                             return (
-                                <RadioCard key={value} {...radio}>
-                                    {value}
+                                <RadioCard key={value.id} {...radio}>
+                                    {value.name}
                                 </RadioCard>
                             );
                         })}
@@ -40,11 +63,21 @@ const Home = () => {
                 </FormControl>
                 <FormControl className="pb-4">
                     <FormLabel>名称</FormLabel>
-                    <Input />
+                    <Input
+                        value={billName}
+                        onChange={(e) => setBillName(e.target.value)}
+                    />
                 </FormControl>
                 <FormControl className="pb-4">
                     <FormLabel>金额</FormLabel>
-                    <Input type="number" />
+                    <Input
+                        type="number"
+                        value={billAmount}
+                        onChange={(e) => {
+                            console.log(e.target.value);
+                            setBillAmount(Number(e.target.value));
+                        }}
+                    />
                 </FormControl>
                 {/* <FormControl className="pb-4">
                     <FormLabel>图片</FormLabel>
@@ -54,7 +87,7 @@ const Home = () => {
 
             {/* 按钮 */}
             <div className="flex w-screen justify-between px-10 py-5">
-                <button className="flex h-12 w-12 items-center justify-center rounded-xl bg-default-card font-semibold">
+                <button className="flex h-12 w-12 items-center justify-center rounded-xl bg-default-card font-semibold" onClick={reset}>
                     <RepeatIcon />
                 </button>
                 <button

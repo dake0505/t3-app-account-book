@@ -7,6 +7,8 @@ import { api } from "~/utils/api";
 const MyType = () => {
     const data = api.billType.queryType.useQuery();
     const mutation = api.billType.createType.useMutation();
+    const deleteMutation = api.billType.deleteType.useMutation();
+
     const router = useRouter();
     const toast = useToast();
 
@@ -24,6 +26,15 @@ const MyType = () => {
             await mutation.mutateAsync({
                 name: typeName,
             });
+            await data.refetch();
+            setTypeName('')
+        } catch (error) {}
+    };
+
+    const deleteType = async (id?: string) => {
+        if (!id) return;
+        try {
+            await deleteMutation.mutateAsync(id);
             await data.refetch();
         } catch (error) {}
     };
@@ -60,7 +71,7 @@ const MyType = () => {
                         className="flex h-12 items-center justify-between px-4 py-8"
                     >
                         <span>{item.name}</span>
-                        <MinusIcon className="bg-default-error" />
+                        <MinusIcon className="bg-default-error" onClick={() => deleteType(item.id)} />
                     </div>
                 ))}
             </div>

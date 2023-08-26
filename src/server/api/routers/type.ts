@@ -21,5 +21,15 @@ export const typeRouter = createTRPCRouter({
 
         }
 
+    }),
+
+    deleteType: publicProcedure.input(z.string()).mutation(async ({ ctx, input }) => {
+        try {
+            await ctx.prisma.billType.delete({
+                where: { id: input }
+            })
+        } catch (error) {
+
+        }
     })
 })
