@@ -1,15 +1,25 @@
 import { AddIcon, ChevronLeftIcon, MinusIcon } from "@chakra-ui/icons";
-import { Button, IconButton, Input } from "@chakra-ui/react";
+import { Button, IconButton, Input, useToast } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { api } from "~/utils/api";
 
 const MyType = () => {
     const data = api.billType.queryType.useQuery();
     const mutation = api.billType.createType.useMutation();
-    const options = ["吃饭", "打车", "shopping", "振鼎鸡"];
+    const router = useRouter();
+    const toast = useToast();
+
     const [typeName, setTypeName] = useState<string>("");
 
     const createType = async () => {
+        if (!typeName) {
+            toast({
+                title: "请输入名称",
+                status: "warning",
+            });
+            return;
+        }
         try {
             await mutation.mutateAsync({
                 name: typeName,
@@ -18,10 +28,16 @@ const MyType = () => {
         } catch (error) {}
     };
 
+    const backMy = async () => {
+        try {
+            await router.push("/my");
+        } catch (error) {}
+    };
+
     return (
         <div className="relative flex min-h-screen flex-col bg-default-bg">
             <div className="absolute top-0 m-4 flex h-8 items-center text-white">
-                <ChevronLeftIcon className="mr-2" /> Back
+                <ChevronLeftIcon className="mr-2" onClick={backMy} /> Back
             </div>
             <div className="mb-4 mt-16 flex justify-around px-4">
                 <Input
