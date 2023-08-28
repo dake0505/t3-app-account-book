@@ -1,9 +1,16 @@
-import { HStack, Input, useToast } from "@chakra-ui/react";
 import { RepeatIcon } from "@chakra-ui/icons";
-import { FormControl, FormLabel, useRadioGroup } from "@chakra-ui/react";
-import RadioCard from "./RadioCard";
-import { api } from "~/utils/api";
+import {
+    FormControl, FormLabel,
+    HStack,
+    Input,
+    NumberInput,
+    NumberInputField,
+    useRadioGroup,
+    useToast
+} from "@chakra-ui/react";
 import { useState } from "react";
+import { api } from "~/utils/api";
+import RadioCard from "./RadioCard";
 
 const Home = () => {
     const mutation = api.bill.createBill.useMutation();
@@ -12,7 +19,7 @@ const Home = () => {
     const [billType, setBillType] = useState<string>("");
     const [billAmount, setBillAmount] = useState<number>();
 
-    const toast = useToast()
+    const toast = useToast();
 
     const { getRootProps, getRadioProps } = useRadioGroup({
         name: "framework",
@@ -23,10 +30,10 @@ const Home = () => {
     const group = getRootProps();
 
     const reset = () => {
-        setBillAmount(undefined)
-        setBillName('')
-        setBillType('')
-    }
+        setBillAmount(undefined);
+        setBillName("");
+        setBillType("");
+    };
 
     const createBill = async () => {
         try {
@@ -36,16 +43,16 @@ const Home = () => {
                 amount: billAmount ?? 0,
             });
             toast({
-                title: '创建成功',
-                status: 'success'
-            })
-            reset()
+                title: "创建成功",
+                status: "success",
+            });
+            reset();
         } catch (error) {}
     };
 
     return (
         <div className="relative flex min-h-screen flex-col bg-default-bg font-sans text-white">
-            <p className="px-10 mt-16 mb-4 text-4xl font-semibold">Create</p>
+            <p className="mb-4 mt-16 px-10 text-4xl font-semibold">Create</p>
             {/* 账单信息 */}
             <div className="px-10">
                 <FormControl className="pb-4">
@@ -70,14 +77,14 @@ const Home = () => {
                 </FormControl>
                 <FormControl className="pb-4">
                     <FormLabel>金额</FormLabel>
-                    <Input
-                        type="number"
+                    <NumberInput
                         value={billAmount}
-                        onChange={(e) => {
-                            console.log(e.target.value);
-                            setBillAmount(Number(e.target.value));
+                        onChange={(value) => {
+                            setBillAmount(Number(value));
                         }}
-                    />
+                    >
+                        <NumberInputField />
+                    </NumberInput>
                 </FormControl>
                 {/* <FormControl className="pb-4">
                     <FormLabel>图片</FormLabel>
@@ -87,7 +94,10 @@ const Home = () => {
 
             {/* 按钮 */}
             <div className="flex w-screen justify-between px-10 py-5">
-                <button className="flex h-12 w-12 items-center justify-center rounded-xl bg-default-card font-semibold" onClick={reset}>
+                <button
+                    className="flex h-12 w-12 items-center justify-center rounded-xl bg-default-card font-semibold"
+                    onClick={reset}
+                >
                     <RepeatIcon />
                 </button>
                 <button

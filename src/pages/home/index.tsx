@@ -1,7 +1,7 @@
 import { Stat, StatHelpText, StatLabel, StatNumber } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import { api } from "~/utils/api";
 import dayjs from "dayjs";
+import { useEffect, useState } from "react";
+import { api } from "~/utils/api";
 
 const Home = () => {
     const data = api.bill.queryBill.useQuery();
