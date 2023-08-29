@@ -1,3 +1,4 @@
+import dayjs from "dayjs"
 import { z } from "zod"
 import { createTRPCRouter, publicProcedure } from "../trpc"
 
@@ -5,14 +6,20 @@ import { createTRPCRouter, publicProcedure } from "../trpc"
 
 
 export const billRouter = createTRPCRouter({
-    getName: publicProcedure.query(({ ctx }) => {
-        return ctx.prisma.home.findMany()
-    }),
     /**
      * 查询账单
      */
-    queryBill: publicProcedure.query(({ ctx }) => {
-        return ctx.prisma.bill.findMany()
+    queryBill: publicProcedure.input(z.object({
+        date: z.string().datetime().optional(),
+    })).query(({ ctx, input }) => {
+        return ctx.prisma.bill.findMany({
+            where: {
+                createdAt: {
+                    gte: dayjs(input.date).startOf('D').toISOString(),
+                    lt:  dayjs(input.date).endOf('D').toISOString(),
+                }
+            }
+        })
     }),
     /**
      * 新增账单
