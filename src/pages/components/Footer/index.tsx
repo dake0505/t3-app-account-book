@@ -1,51 +1,12 @@
-import { useState } from "react";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 const Footer = () => {
     const router = useRouter();
     const [activeBtn, setActiveBtn] = useState<string>("home");
     return (
         <div className="absolute inset-x-0 bottom-0 flex h-20 w-screen items-center justify-around rounded-t-lg bg-default-card">
-            <div
-                className={`flex h-16 w-16 items-center justify-center rounded-full ${
-                    activeBtn === "create" ? "bg-default-active" : ""
-                }`}
-                onClick={() => {
-                    setActiveBtn("create");
-                    router
-                        .push("/create")
-                        .then((res) => {
-                            console.log(res);
-                        })
-                        .catch((err) => console.log(err));
-                }}
-            >
-                <svg
-                    className="h-6 w-6"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    stroke="#ffffff"
-                >
-                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                    <g
-                        id="SVGRepo_tracerCarrier"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                    ></g>
-                    <g id="SVGRepo_iconCarrier">
-                        {" "}
-                        <path
-                            d="M2 6C2 4.11438 2 3.17157 2.58579 2.58579C3.17157 2 4.11438 2 6 2C7.88562 2 8.82843 2 9.41421 2.58579C10 3.17157 10 4.11438 10 6V18C10 19.8856 10 20.8284 9.41421 21.4142C8.82843 22 7.88562 22 6 22C4.11438 22 3.17157 22 2.58579 21.4142C2 20.8284 2 19.8856 2 18V6Z"
-                            fill="#ffffff"
-                        ></path>{" "}
-                        <path
-                            d="M14 6C14 4.11438 14 3.17157 14.5858 2.58579C15.1716 2 16.1144 2 18 2C19.8856 2 20.8284 2 21.4142 2.58579C22 3.17157 22 4.11438 22 6V18C22 19.8856 22 20.8284 21.4142 21.4142C20.8284 22 19.8856 22 18 22C16.1144 22 15.1716 22 14.5858 21.4142C14 20.8284 14 19.8856 14 18V6Z"
-                            fill="#ffffff"
-                        ></path>{" "}
-                    </g>
-                </svg>
-            </div>
+            {/* home */}
             <div
                 className={`flex h-16 w-16 items-center justify-center rounded-full ${
                     activeBtn === "home" ? "bg-default-active" : ""
@@ -84,6 +45,86 @@ const Footer = () => {
                     </g>
                 </svg>
             </div>
+            {/* bill */}
+            <div
+                className={`flex h-16 w-16 items-center justify-center rounded-full ${
+                    activeBtn === "create" ? "bg-default-active" : ""
+                }`}
+                onClick={() => {
+                    setActiveBtn("create");
+                    router
+                        .push("/create")
+                        .then((res) => {
+                            console.log(res);
+                        })
+                        .catch((err) => console.log(err));
+                }}
+            >
+                <svg
+                    className="h-6 w-6"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    stroke="#ffffff"
+                >
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g
+                        id="SVGRepo_tracerCarrier"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                        {" "}
+                        <path
+                            d="M11 8L16 8.00053M11 12L16 12.0005M11 16L16 16.0005M8 16H8.01M8 12H8.01M8 8H8.01M7.2 4H16.8C17.9201 4 18.4802 4 18.908 4.21799C19.2843 4.40973 19.5903 4.71569 19.782 5.09202C20 5.51984 20 6.0799 20 7.2V16.8C20 17.9201 20 18.4802 19.782 18.908C19.5903 19.2843 19.2843 19.5903 18.908 19.782C18.4802 20 17.9201 20 16.8 20H7.2C6.0799 20 5.51984 20 5.09202 19.782C4.71569 19.5903 4.40973 19.2843 4.21799 18.908C4 18.4802 4 17.9201 4 16.8V7.2C4 6.0799 4 5.51984 4.21799 5.09202C4.40973 4.71569 4.71569 4.40973 5.09202 4.21799C5.51984 4 6.0799 4 7.2 4Z"
+                            stroke="#ffffff"
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        ></path>{" "}
+                    </g>
+                </svg>
+            </div>
+            {/* report */}
+            <div
+                className={`flex h-16 w-16 items-center justify-center rounded-full ${
+                    activeBtn === "report" ? "bg-default-active" : ""
+                }`}
+                onClick={() => {
+                    setActiveBtn("report");
+                    router
+                        .push("/report")
+                        .then((res) => {
+                            console.log(res);
+                        })
+                        .catch((err) => console.log(err));
+                }}
+            >
+                <svg
+                    className="h-6 w-6"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g
+                        id="SVGRepo_tracerCarrier"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                        {" "}
+                        <path
+                            d="M21 3L14 9L10 5L3 11M4.5 21C3.67157 21 3 20.3284 3 19.5V17.5C3 16.6716 3.67157 16 4.5 16C5.32843 16 6 16.6716 6 17.5V19.5C6 20.3284 5.32843 21 4.5 21ZM11.5 21C10.6716 21 10 20.3284 10 19.5V14.5C10 13.6716 10.6716 13 11.5 13C12.3284 13 13 13.6716 13 14.5V19.5C13 20.3284 12.3284 21 11.5 21ZM18.5 21C17.6716 21 17 20.3284 17 19.5V16.5C17 15.6716 17.6716 15 18.5 15C19.3284 15 20 15.6716 20 16.5V19.5C20 20.3284 19.3284 21 18.5 21Z"
+                            stroke="#ffffff"
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        ></path>{" "}
+                    </g>
+                </svg>
+            </div>
+            {/* my */}
             <div
                 className={`flex h-16 w-16 items-center justify-center rounded-full ${
                     activeBtn === "my" ? "bg-default-active" : ""
@@ -128,4 +169,4 @@ const Footer = () => {
     );
 };
 
-export default Footer
+export default Footer;
