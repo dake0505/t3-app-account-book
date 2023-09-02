@@ -48,12 +48,12 @@ const Footer = () => {
             {/* bill */}
             <div
                 className={`flex h-16 w-16 items-center justify-center rounded-full ${
-                    activeBtn === "create" ? "bg-default-active" : ""
+                    activeBtn === "bill" ? "bg-default-active" : ""
                 }`}
                 onClick={() => {
-                    setActiveBtn("create");
+                    setActiveBtn("bill");
                     router
-                        .push("/create")
+                        .push("/bill")
                         .then((res) => {
                             console.log(res);
                         })
