@@ -1,4 +1,4 @@
-import { Box, type UseRadioProps, useRadio } from "@chakra-ui/react";
+import { Box, useRadio, type UseRadioProps } from "@chakra-ui/react";
 import { type NextPage } from "next";
 
 type IProps = UseRadioProps & {

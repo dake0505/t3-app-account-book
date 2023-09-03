@@ -1,5 +1,6 @@
 import { Stat, StatLabel, StatNumber } from "@chakra-ui/react";
 import dayjs from "dayjs";
+import { useRouter } from "next/router";
 import { forwardRef, useEffect, useState, type ReactNode } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -25,6 +26,7 @@ const ExampleCustomInput = forwardRef<Ref, Props>(({ value, onClick }, ref) => (
 ExampleCustomInput.displayName = "ExampleCustomInput";
 
 const Home = () => {
+    const router = useRouter();
     const [startDate, setStartDate] = useState(new Date());
     const [totalAmount, setTotalAmount] = useState<number>(0);
     const billData = api.bill.queryBill.useQuery({
@@ -63,7 +65,14 @@ const Home = () => {
                 </Stat>
             </div>
             <div className="absolute bottom-0 flex h-4/6 w-screen flex-col items-center rounded-tl-3xl bg-default-bg py-4 text-white">
-                <div className="w-4/5 rounded-2xl bg-default-active py-4 text-xl font-bold flex items-center justify-center">
+                <div
+                    className="flex w-4/5 items-center justify-center rounded-2xl bg-default-active py-4 text-xl font-bold"
+                    onClick={() => {
+                        router.push("/create").catch((err) => {
+                            console.log(err);
+                        });
+                    }}
+                >
                     <svg
                         className="h-6 w-6"
                         viewBox="0 0 24 24"
@@ -91,7 +100,7 @@ const Home = () => {
                     记一笔
                 </div>
                 <div className="w-4/5">
-                    <p className="text-base font-bold mt-4 mb-2">近三日明细</p>
+                    <p className="mb-2 mt-4 text-base font-bold">近三日明细</p>
                     {billData.data?.map((item) => (
                         <div
                             key={item.id}
