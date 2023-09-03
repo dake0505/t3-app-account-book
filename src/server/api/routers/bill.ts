@@ -21,6 +21,19 @@ export const billRouter = createTRPCRouter({
             }
         })
     }),
+
+    queryBillByMonth: publicProcedure.input(z.object({
+        date: z.string().datetime().optional(),
+    })).query(({ ctx, input }) => {
+        return ctx.prisma.bill.findMany({
+            where: {
+                createdAt: {
+                    gte: dayjs(input.date).startOf('M').toISOString(),
+                    lt:  dayjs().endOf('M').toISOString(),
+                }
+            }
+        })
+    }),
     /**
      * 新增账单
      */

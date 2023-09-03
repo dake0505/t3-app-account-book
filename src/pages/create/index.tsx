@@ -1,22 +1,20 @@
 import { ChevronLeftIcon, RepeatIcon } from "@chakra-ui/icons";
 import {
     Box,
-    Button,
+    Drawer,
+    DrawerBody,
+    DrawerContent,
+    DrawerHeader,
+    DrawerOverlay,
     FormControl,
     FormLabel,
     HStack,
     Input,
-    Modal,
-    ModalBody,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    ModalOverlay,
     NumberInput,
     NumberInputField,
     useDisclosure,
     useRadioGroup,
-    useToast
+    useToast,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { forwardRef, useState, type ReactNode } from "react";
@@ -50,6 +48,7 @@ const Home = () => {
     const [billType, setBillType] = useState<string>("");
     const [billAmount, setBillAmount] = useState<number>();
     const [startDate, setStartDate] = useState(new Date());
+    const [newType, setNewType] = useState<string>("");
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     const toast = useToast();
@@ -124,29 +123,59 @@ const Home = () => {
                             );
                         })}
                         <Box onClick={onOpen}>添加</Box>
-                        <Modal isOpen={isOpen} onClose={onClose}>
-                            <ModalOverlay />
-                            <ModalContent>
-                                <ModalHeader>Modal Title</ModalHeader>
-                                {/* <ModalCloseButton /> */}
-                                <ModalBody>
-                                    123
-                                </ModalBody>
-
-                                <ModalFooter>
-                                    <Button
-                                        colorScheme="blue"
-                                        mr={3}
-                                        onClick={onClose}
-                                    >
-                                        Close
-                                    </Button>
-                                    <Button variant="ghost">
-                                        Secondary Action
-                                    </Button>
-                                </ModalFooter>
-                            </ModalContent>
-                        </Modal>
+                        <Drawer
+                            placement="bottom"
+                            onClose={onClose}
+                            isOpen={isOpen}
+                        >
+                            <DrawerOverlay />
+                            <DrawerContent>
+                                <DrawerHeader borderBottomWidth="0" className="bg-default-bg text-white">
+                                    添加分类
+                                </DrawerHeader>
+                                <DrawerBody className="bg-default-bg text-white">
+                                    <div className="h-32">
+                                        <Input
+                                            value={newType}
+                                            onChange={(e) =>
+                                                setNewType(e.target.value)
+                                            }
+                                        ></Input>
+                                        <div className="mt-4">
+                                            <div className="bg-default-active w-4/4 py-4 flex items-center justify-center rounded-lg">
+                                                <svg
+                                                    className="h-6 w-6 "
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    stroke="#ffffff"
+                                                >
+                                                    <g
+                                                        id="SVGRepo_bgCarrier"
+                                                        strokeWidth="0"
+                                                    ></g>
+                                                    <g
+                                                        id="SVGRepo_tracerCarrier"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                    ></g>
+                                                    <g id="SVGRepo_iconCarrier">
+                                                        {" "}
+                                                        <path
+                                                            d="M4 12.6111L8.92308 17.5L20 6.5"
+                                                            stroke="#ffffff"
+                                                            strokeWidth="2"
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                        ></path>{" "}
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </DrawerBody>
+                            </DrawerContent>
+                        </Drawer>
                     </HStack>
                 </FormControl>
                 <FormControl className="pb-4">
