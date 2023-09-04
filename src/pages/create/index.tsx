@@ -44,6 +44,7 @@ const Home = () => {
     const router = useRouter();
     const mutation = api.bill.createBill.useMutation();
     const billTypeData = api.billType.queryType.useQuery();
+    const billTypeMutation = api.billType.createType.useMutation();
     const [billName, setBillName] = useState<string>("");
     const [billType, setBillType] = useState<string>("");
     const [billAmount, setBillAmount] = useState<number>();
@@ -79,6 +80,20 @@ const Home = () => {
                 status: "success",
             });
             reset();
+            await router.push("/home");
+        } catch (error) {}
+    };
+
+    const createNewType = async () => {
+        try {
+            await billTypeMutation.mutateAsync({ name: newType });
+            onClose();
+            setNewType("");
+            toast({
+                title: "创建成功",
+                status: "success",
+            });
+            await billTypeData.refetch();
         } catch (error) {}
     };
 
@@ -130,7 +145,10 @@ const Home = () => {
                         >
                             <DrawerOverlay />
                             <DrawerContent>
-                                <DrawerHeader borderBottomWidth="0" className="bg-default-bg text-white">
+                                <DrawerHeader
+                                    borderBottomWidth="0"
+                                    className="bg-default-bg text-white"
+                                >
                                     添加分类
                                 </DrawerHeader>
                                 <DrawerBody className="bg-default-bg text-white">
@@ -142,7 +160,10 @@ const Home = () => {
                                             }
                                         ></Input>
                                         <div className="mt-4">
-                                            <div className="bg-default-active w-4/4 py-4 flex items-center justify-center rounded-lg">
+                                            <div
+                                                className="w-4/4 flex items-center justify-center rounded-lg bg-default-active py-4"
+                                                onClick={createNewType}
+                                            >
                                                 <svg
                                                     className="h-6 w-6 "
                                                     viewBox="0 0 24 24"

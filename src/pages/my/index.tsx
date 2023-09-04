@@ -1,10 +1,9 @@
-import { Avatar } from "@chakra-ui/react";
-import React from "react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
+import { Avatar } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 const My = () => {
-    const router = useRouter()
+    const router = useRouter();
 
     return (
         <div className="relative flex min-h-screen flex-col bg-default-bg">
@@ -15,11 +14,14 @@ const My = () => {
             </div>
 
             <div className="divide-y divide-solid divide-default-border bg-default-card font-bold text-white">
-                <div className="flex h-12 items-center px-4 py-8" onClick={() => {
-                    router.push('/my/type').catch(err => {
-                        console.log(err)
-                    })
-                }}>
+                <div
+                    className="flex h-12 items-center px-4 py-8"
+                    onClick={() => {
+                        router.push("/my/type").catch((err) => {
+                            console.log(err);
+                        });
+                    }}
+                >
                     <span className="flex-1">常用分类</span>
                     <ChevronRightIcon color="white" />
                 </div>
@@ -27,7 +29,14 @@ const My = () => {
                     <span className="flex-1">常用名称</span>
                     <ChevronRightIcon color="white" />
                 </div>
-                <div className="flex h-12 items-center px-4 py-8">
+                <div
+                    className="flex h-12 items-center px-4 py-8"
+                    onClick={() => {
+                        router.push("/my/quota").catch((err) => {
+                            console.log(err);
+                        });
+                    }}
+                >
                     <span className="flex-1">额度设置</span>
                     <ChevronRightIcon color="white" />
                 </div>

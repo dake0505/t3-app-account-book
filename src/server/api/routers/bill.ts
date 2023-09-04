@@ -31,6 +31,9 @@ export const billRouter = createTRPCRouter({
                     gte: dayjs(input.date).startOf('M').toISOString(),
                     lt:  dayjs().endOf('M').toISOString(),
                 }
+            },
+            orderBy: {
+                createdAt: 'desc'
             }
         })
     }),
